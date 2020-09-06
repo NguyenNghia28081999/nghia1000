@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebsiteBanGiay.Models.DanhMuc>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenDanhMuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HinhAnhDanhMuc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenDanhMuc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HinhAnhDanhMuc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.MaDanhMuc }) |
+            @if (item.Giays.Count == 0)
+            {
+                <a href="@Url.Action("DeleteConfirmed", "Giays", new { @id = item.MaDanhMuc })">Delete</a>
+            }
+            else
+            {
+                <a href="#" onclick="return confirm('Không thể xóa')">Delete</a>
+            }
+        </td>
+    </tr>
+}
+
+</table>
